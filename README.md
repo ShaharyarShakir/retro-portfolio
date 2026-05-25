@@ -51,7 +51,7 @@ Open [http://localhost:4321](http://localhost:4321).
 /
 ├── public/                 # Static assets (favicon, etc.)
 ├── src/
-│   ├── componnets/         # React & Astro UI (note: folder name typo)
+│   ├── components/         # React & Astro UI
 │   │   ├── about/
 │   │   ├── blog/
 │   │   ├── common/         # Nav, Footer, RouterWrapper
