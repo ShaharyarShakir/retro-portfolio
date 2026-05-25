@@ -47,17 +47,21 @@ interface FieldProps {
 
 function Field({ label, id, type = 'text', placeholder, value, error, textarea, onChange }: FieldProps) {
   const inputClass = `
-    w-full bg-transparent border-b font-mono text-[13px] text-[#f0ede6]
-    placeholder-[#2a2a2a] py-2.5 outline-none
+    w-full font-mono text-[14px] sm:text-[15px] text-[#f0ede6]
+    bg-[#111] border px-3 py-3 outline-none
+    placeholder:text-[#555] placeholder:opacity-100
     transition-colors duration-150
-    ${error ? 'border-[#e63222]' : 'border-[#1e1e1e] focus:border-[#c8f135]'}
+    focus:ring-1 focus:ring-[#c8f135]/40 focus:ring-offset-0
+    ${error
+      ? 'border-[#e63222]'
+      : 'border-[#2a2a2a] focus:border-[#c8f135] focus:bg-[#0f0f0f]'}
   `
 
   return (
-    <div className="form-field mb-6">
+    <div className="form-field mb-8">
       <label
         htmlFor={id}
-        className="block text-[10px] tracking-[2px] text-[#333] uppercase font-mono mb-2"
+        className="block text-[11px] sm:text-[12px] tracking-[2.5px] text-[#c8f135] uppercase font-mono mb-2.5"
       >
         {label}
         <span className="text-[#c8f135] ml-1" aria-hidden="true">*</span>
@@ -184,14 +188,14 @@ export default function ContactForm() {
         className="section-x py-8 md:py-12 flex flex-col items-start justify-center min-h-[280px] md:min-h-[400px]"
       >
         <span
-          className="text-[48px] md:text-[64px] text-[#c8f135] leading-none mb-6"
+          className="text-[64px] text-[#c8f135] leading-none mb-6"
           style={{ fontFamily: "'Bebas Neue', sans-serif" }}
           aria-hidden="true"
         >
           ✓
         </span>
         <h3
-          className="text-[24px] md:text-[32px] text-[#f0ede6] leading-none mb-4"
+          className="text-[32px] text-[#f0ede6] leading-none mb-4"
           style={{ fontFamily: "'Bebas Neue', sans-serif" }}
         >
           Message Sent.
@@ -216,8 +220,8 @@ export default function ContactForm() {
 
   // ── Default form state ───────────────────────────────────────────
   return (
-    <div ref={containerRef} className="section-x py-8 md:py-12">
-      <p className="text-[10px] tracking-[3px] text-[#333] uppercase font-mono mb-8">
+    <div ref={containerRef} className="px-12 py-12">
+      <p className="text-[10px] tracking-[3px] text-[#666] uppercase font-mono mb-8">
         // Send a message
       </p>
 
@@ -281,13 +285,13 @@ export default function ContactForm() {
           )}
         </button>
 
-        <p className="mt-4 text-[10px] text-[#2a2a2a] font-mono text-center">
+        <p className="mt-6 text-[12px] text-[#666] font-mono text-center font-semibold  pt-2">
           Or email directly:{' '}
           <a
-            href="mailto:shaharyar@example.com"
-            className="text-[#333] hover:text-[#c8f135] transition-colors duration-150"
+            href="mailto:shakirshaharyar125@gmail.com"
+            className="text-[#666] hover:text-[#c8f135] transition-colors duration-150 underline underline-offset-2"
           >
-            shaharyar@example.com
+            shakirshaharyar125@gmail.com
           </a>
         </p>
       </form>
