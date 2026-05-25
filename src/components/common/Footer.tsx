@@ -112,10 +112,10 @@ export default function Footer() {
                     {/* Col 1 — Identity */}
                     <div
                         ref={col1Ref}
-                        className="px-10 py-12 border-[#1e1e1e] md:border-r border-b md:border-b-0"
+                        className="section-x py-8 md:py-12 border-[#1e1e1e] md:border-r border-b md:border-b-0"
                     >
                         <p
-                            className="mb-4 text-[#f0ede6] text-[64px] leading-none tracking-tight"
+                            className="mb-4 text-[#f0ede6] text-[48px] sm:text-[56px] md:text-[64px] leading-none tracking-tight"
                             style={{ fontFamily: "'Bebas Neue', sans-serif" }}
                         >
                             YK.DEV
@@ -143,7 +143,7 @@ export default function Footer() {
                     {/* Col 2 — Social links */}
                     <div
                         ref={col2Ref}
-                        className="px-10 py-12 border-[#1e1e1e] md:border-r border-b md:border-b-0"
+                        className="section-x py-8 md:py-12 border-[#1e1e1e] md:border-r border-b md:border-b-0"
                     >
                         <p className="mb-6 text-[#333] text-[10px] uppercase tracking-[3px]">
               // Find me
@@ -179,7 +179,7 @@ export default function Footer() {
                     {/* Col 3 — Stack + live clock */}
                     <div
                         ref={col3Ref}
-                        className="flex flex-col px-10 py-12"
+                        className="flex flex-col section-x py-8 md:py-12"
                     >
                         <p className="mb-6 text-[#333] text-[10px] uppercase tracking-[3px]">
               // Built with
@@ -212,7 +212,7 @@ export default function Footer() {
                 // Your local time
                             </p>
                             <p
-                                className="tabular-nums text-[#c8f135] text-[28px] leading-none"
+                                className="tabular-nums text-[#c8f135] text-[22px] sm:text-[28px] leading-none"
                                 style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: '2px' }}
                                 aria-live="polite"
                                 aria-label={`Current local time: ${time}`}
@@ -230,7 +230,7 @@ export default function Footer() {
                 {/* ── Bottom bar ── */}
                 <div
                     ref={bottomRef}
-                    className="flex md:flex-row flex-col justify-between items-start md:items-center gap-3 px-10 py-5"
+                    className="flex md:flex-row flex-col justify-between items-start md:items-center gap-3 section-x py-5"
                 >
                     <p className="text-[#333] text-[10px] tracking-[1px]">
                         © {year} YK.DEV — All rights reserved.
