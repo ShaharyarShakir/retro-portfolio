@@ -34,7 +34,7 @@ export default function AboutHeader() {
   return (
     <div
       ref={containerRef}
-      className="px-12 pt-16 pb-10 border-b border-[#1e1e1e]"
+      className="section-x pt-10 md:pt-16 pb-8 md:pb-10 border-b border-[#1e1e1e]"
     >
       <div className="flex items-center gap-3 mb-4">
         <span
@@ -51,10 +51,10 @@ export default function AboutHeader() {
         </p>
       </div>
  
-      <div className="flex items-end justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
         <h2
           ref={titleRef}
-          className="text-[64px] leading-none text-[#f0ede6] tracking-tight"
+          className="text-[48px] sm:text-[56px] md:text-[64px] leading-none text-[#f0ede6] tracking-tight"
           style={{ fontFamily: "'Bebas Neue', sans-serif" }}
         >
           The Engineer
