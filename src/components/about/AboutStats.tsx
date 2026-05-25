@@ -43,14 +43,14 @@ function Stat({ value, suffix, label, decimal, animate }: typeof STATS[0] & { an
   const displayed = useCounter(value, decimal, animate)
 
   return (
-    <div className="stat-item flex flex-col items-center justify-center px-8 py-8 border-r border-[#1e1e1e] last:border-r-0 flex-1">
+    <div className="stat-item flex flex-col items-center justify-center px-4 py-6 sm:px-6 sm:py-8 md:px-8">
       <p
-        className="text-[56px] leading-none text-[#c8f135] tabular-nums"
+        className="text-[40px] sm:text-[48px] md:text-[56px] leading-none text-[#c8f135] tabular-nums"
         style={{ fontFamily: "'Bebas Neue', sans-serif" }}
         aria-label={`${value}${suffix} ${label}`}
       >
         {displayed}
-        <span className="text-[40px]">{suffix}</span>
+        <span className="text-[28px] sm:text-[34px] md:text-[40px]">{suffix}</span>
       </p>
       <p className="text-[10px] tracking-[2px] text-[#333] uppercase font-mono mt-2 text-center">
         {label}
@@ -84,7 +84,7 @@ export default function AboutStats() {
   return (
     <div
       ref={containerRef}
-      className="flex border-b border-[#1e1e1e] border-t border-t-[#1e1e1e]"
+      className="grid grid-cols-2 md:grid-cols-4 border-b border-t border-[#1e1e1e] divide-x divide-y divide-[#1e1e1e]"
     >
       {STATS.map((stat) => (
         <Stat key={stat.label} {...stat} animate={animate} />
