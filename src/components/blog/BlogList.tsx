@@ -49,7 +49,7 @@ function PostRow({ post }: { post: BlogPost }) {
     return (
         <a
             href={`/blog/${post.collection}/${post.slug}`}
-            className="group grid grid-cols-1 md:grid-cols-[minmax(72px,92px)_1fr_auto] gap-x-8 md:gap-x-12 gap-y-3 md:gap-y-0 md:items-center hover:bg-[#080808]/50 px-12 py-7 md:py-8 border-[#1e1e1e] border-b no-underline transition-colors duration-150 blog-row"
+            className="group grid grid-cols-1 md:grid-cols-[minmax(72px,92px)_1fr_auto] gap-x-8 md:gap-x-12 gap-y-3 md:gap-y-0 md:items-center hover:bg-[#080808]/50 section-x py-6 sm:py-7 md:py-8 border-[#1e1e1e] border-b no-underline transition-colors duration-150 blog-row"
         >
             <span className="font-mono text-[#555] text-[10px] uppercase tracking-[1px] md:pt-0">
                 {post.date}
@@ -148,24 +148,22 @@ export default function BlogList({ posts, totalPostCount }: BlogListProps) {
             {/* ── Section header ── */}
             <div
                 ref={headerRef}
-                className="flex justify-between items-start gap-8 px-12 pt-16 pb-10 border-[#1e1e1e] border-b"
+                className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-6 lg:gap-8 section-x pt-10 md:pt-16 pb-8 md:pb-10 border-[#1e1e1e] border-b"
             >
                 <div className="flex-1 min-w-0">
                     <p className="mb-3 font-mono text-[#333] text-[10px] uppercase tracking-[3px]">
                         — Writing
                     </p>
-                    <div className="flex w-full items-center gap-3 flex-col md:flex-row justify-between">
-                        <h2 className="flex items-baseline gap-3 text-[#f0ede6] leading-none tracking-tight">
-                            <span className="flex items-baseline gap-3">
-                                <span className="font-mono text-2xl text-[#c8f135] tabular-nums">
-                                    {String(archiveTotal).padStart(2, '0')}
-                                </span>
-                                <span className="text-[64px]" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>
-                                    Field Notes
-                                </span>
+                    <div className="flex w-full min-w-0 flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+                        <h2 className="flex flex-wrap items-baseline gap-2 sm:gap-3 text-[#f0ede6] leading-none tracking-tight min-w-0">
+                            <span className="font-mono text-xl sm:text-2xl text-[#c8f135] tabular-nums">
+                                {String(archiveTotal).padStart(2, '0')}
+                            </span>
+                            <span className="text-[40px] sm:text-[56px] md:text-[64px]" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>
+                                Field Notes
                             </span>
                         </h2>
-                        <p className="flex items-baseline gap-2 font-mono text-[#c8f135] text-[10px] uppercase tracking-[4px] whitespace-nowrap">
+                        <p className="flex items-baseline gap-2 font-mono text-[#c8f135] text-[10px] uppercase tracking-[2px] sm:tracking-[4px]">
                             <span aria-hidden="true">|</span>
                             <span className="tabular-nums">{String(archiveTotal).padStart(2, '0')}</span>
                             <span>{archiveTotal === 1 ? 'Article' : 'Articles'}</span>
@@ -173,11 +171,10 @@ export default function BlogList({ posts, totalPostCount }: BlogListProps) {
                     </div>
                 </div>
 
-                <div className="flex items-center gap-6">
-                 
+                <div className="flex items-stretch sm:items-center w-full sm:w-auto">
                     <a
                         href="/blog"
-                        className="group shrink-0 flex items-center gap-2 bg-[#0f0f0f] hover:bg-[#1a1a1a] px-4 py-2.5 border border-[#333] hover:border-[#c8f135] font-mono text-[#f0ede6] text-[10px] hover:text-[#c8f135] no-underline uppercase tracking-[2px] transition-colors duration-150"
+                        className="group flex w-full sm:w-auto shrink-0 items-center justify-center gap-2 bg-[#0f0f0f] hover:bg-[#1a1a1a] px-4 py-2.5 border border-[#333] hover:border-[#c8f135] font-mono text-[#f0ede6] text-[10px] hover:text-[#c8f135] no-underline uppercase tracking-[2px] transition-colors duration-150"
                     >
                         View all
                         <span
@@ -193,7 +190,7 @@ export default function BlogList({ posts, totalPostCount }: BlogListProps) {
             {/* ── Post list ── */}
             <div ref={listRef}>
                 {posts.length === 0 ? (
-                    <div className="px-12 py-16 text-center">
+                    <div className="section-x py-12 md:py-16 text-center">
                         <p className="font-mono text-[#333] text-[12px] uppercase tracking-[2px]">
               // No posts yet — check back soon
                         </p>
@@ -206,7 +203,7 @@ export default function BlogList({ posts, totalPostCount }: BlogListProps) {
             {/* ── Footer CTA ── */}
             <div
                 ref={footerRef}
-                className="flex justify-between items-center px-12 py-8"
+                className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 section-x py-6 md:py-8"
             >
                 <p className="font-mono text-[#333] text-[11px]">
           // Thoughts on DevOps, MLOps, Full-Stack &amp; Mobile
