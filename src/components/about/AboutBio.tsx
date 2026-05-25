@@ -56,11 +56,11 @@ export default function AboutBio({ introOnly = false }: AboutBioProps) {
 
       {/* ── Bio ── */}
       <div ref={bioRef} className="flex flex-col gap-4">
-        <p className="font-mono text-[#333] text-[10px] uppercase tracking-[3px]">
+        <p className="font-mono text-[#333] text-[11px] sm:text-[12px] uppercase tracking-[3px]">
           // Who I am
         </p>
 
-        <p className="font-mono text-[#666] text-[13px] leading-loose">
+        <p className="font-mono text-[#666] text-[14px] sm:text-[15px] leading-loose">
           I'm <span className="font-bold text-[#f0ede6]">Shaharyar Shakir</span> — a DevOps &
           MLOps engineer with full-stack and React Native capabilities.
           I work across the entire delivery lifecycle: from designing
@@ -68,14 +68,14 @@ export default function AboutBio({ introOnly = false }: AboutBioProps) {
           production web apps and mobile products.
         </p>
 
-        <p className="font-mono text-[#555] text-[13px] leading-loose">
+        <p className="font-mono text-[#555] text-[14px] sm:text-[15px] leading-loose">
           My work sits at the intersection of infrastructure reliability,
           machine learning productionization, and modern product engineering.
           I care about systems that are observable, reproducible, and actually
           enjoyable to operate at 3am when something breaks.
         </p>
 
-        <p className="font-mono text-[#555] text-[13px] leading-loose">
+        <p className="font-mono text-[#555] text-[14px] sm:text-[15px] leading-loose">
           Based in <span className="text-[#f0ede6]">Pakistan</span> · Open to remote
           roles globally.
         </p>
