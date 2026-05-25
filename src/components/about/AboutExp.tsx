@@ -76,11 +76,11 @@ function Tag({ label }: { label: string }) {
 function ExpItem({ item }: { item: ExperienceItem }) {
   return (
     <div className="exp-item py-6 border-b border-[#1e1e1e]">
-      <div className="flex items-start justify-between gap-4 mb-1">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 sm:gap-4 mb-1">
         <p className="text-[13px] text-[#f0ede6] font-mono font-bold leading-snug">
           {item.role}
         </p>
-        <span className="text-[10px] text-[#c8f135] font-mono tracking-[1px] whitespace-nowrap flex-shrink-0">
+        <span className="text-[10px] text-[#c8f135] font-mono tracking-[1px] sm:whitespace-nowrap shrink-0">
           {item.period}
         </span>
       </div>
@@ -147,7 +147,7 @@ export default function AboutExperience() {
   }, { scope: containerRef, dependencies: [] })
 
   return (
-    <div ref={containerRef} className="px-12 py-12 flex flex-col gap-10">
+    <div ref={containerRef} className="section-x py-8 md:py-12 flex flex-col gap-10">
 
       {/* ── Experience ── */}
       <div ref={expRef}>
@@ -168,11 +168,11 @@ export default function AboutExperience() {
 
         {EDUCATION.map((edu) => (
           <div key={edu.period} className="py-5 border-t border-[#1e1e1e]">
-            <div className="flex items-start justify-between gap-4 mb-1">
+            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 sm:gap-4 mb-1">
               <p className="text-[13px] text-[#f0ede6] font-mono font-bold">
                 {edu.degree}
               </p>
-              <span className="text-[10px] text-[#c8f135] font-mono tracking-[1px] whitespace-nowrap flex-shrink-0">
+              <span className="text-[10px] text-[#c8f135] font-mono tracking-[1px] sm:whitespace-nowrap shrink-0">
                 {edu.period}
               </span>
             </div>
@@ -185,7 +185,7 @@ export default function AboutExperience() {
       </div>
 
       {/* ── Download CV CTA ── */}
-      <div ref={ctaRef} className="flex items-center gap-4 pt-2">
+      <div ref={ctaRef} className="flex flex-wrap items-center gap-3 sm:gap-4 pt-2">
         <a
           href="/Shaharyar_Shakir_Resume.pdf"
           download="Shaharyar_Shakir_Resume.pdf"
