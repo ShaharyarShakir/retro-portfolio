@@ -10,7 +10,11 @@ interface Props {
 }
 
 const { post } = Astro.props;
-const { title, excerpt, date, tag, readTime, github, featured } = post.data;
+const { title, excerpt, date, tag, readTime, github, projectUrl, featured } = post.data;
+
+const projectLink = projectUrl ?? github;
+const showProjectCta = Boolean(projectLink);
+const showGithubCta = Boolean(github);
 
 // Format date for display
 const displayDate = date.toLocaleDateString("en-US", {
@@ -127,34 +131,51 @@ const tagColor = TAG_COLORS[tag] ?? "#c8f135";
                 </p>
 
                 <!-- Meta row -->
-                <div class="flex flex-wrap justify-between items-center gap-4">
-                    <div class="flex items-center gap-6">
-                        <span
-                            class="font-mono text-[#333] text-[10px] uppercase tracking-[1px]"
-                        >
-                            {displayDate}
-                        </span>
-                        {
-                            readTime && (
-                                <span class="font-mono text-[#333] text-[10px] tracking-[1px]">
-                                    {readTime} min read
-                                </span>
-                            )
-                        }
-                    </div>
+                <div class="flex flex-wrap items-center gap-4 sm:gap-6 mb-8">
+                    <span
+                        class="font-mono text-[#555] text-[11px] sm:text-[12px] uppercase tracking-[1px]"
+                    >
+                        {displayDate}
+                    </span>
                     {
-                        github && (
-                            <a
-                                href={github}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                class="flex items-center gap-1.5 font-mono text-[#555] text-[10px] hover:text-[#c8f135] no-underline uppercase tracking-[1px] transition-colors duration-150"
-                            >
-                                View on GitHub ↗
-                            </a>
+                        readTime && (
+                            <span class="font-mono text-[#555] text-[11px] sm:text-[12px] tracking-[1px]">
+                                {readTime} min read
+                            </span>
                         )
                     }
                 </div>
+
+                {
+                    (showProjectCta || showGithubCta) && (
+                        <div class="post-cta-bar">
+                            {
+                                showProjectCta && (
+                                    <a
+                                        href={projectLink}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="post-cta-btn post-cta-btn--primary w-full sm:w-auto"
+                                    >
+                                        View Project ↗
+                                    </a>
+                                )
+                            }
+                            {
+                                showGithubCta && (
+                                    <a
+                                        href={github}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="post-cta-btn post-cta-btn--secondary w-full sm:w-auto"
+                                    >
+                                        View on GitHub ↗
+                                    </a>
+                                )
+                            }
+                        </div>
+                    )
+                }
             </div>
 
             <!-- ── MDX content ── -->
@@ -162,9 +183,40 @@ const tagColor = TAG_COLORS[tag] ?? "#c8f135";
                 <slot />
             </article>
 
+            {
+                (showProjectCta || showGithubCta) && (
+                    <div class="post-cta-bar mt-12 mb-4">
+                        {
+                            showProjectCta && (
+                                <a
+                                    href={projectLink}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="post-cta-btn post-cta-btn--primary w-full sm:w-auto"
+                                >
+                                    View Project ↗
+                                </a>
+                            )
+                        }
+                        {
+                            showGithubCta && (
+                                <a
+                                    href={github}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="post-cta-btn post-cta-btn--secondary w-full sm:w-auto"
+                                >
+                                    View on GitHub ↗
+                                </a>
+                            )
+                        }
+                    </div>
+                )
+            }
+
             <!-- ── Post footer ── -->
             <div
-                class="flex justify-between items-center mt-16 pt-8 border-[#1e1e1e] border-t"
+                class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mt-16 pt-8 border-[#1e1e1e] border-t"
             >
                 <a
                     href="/#blog"
