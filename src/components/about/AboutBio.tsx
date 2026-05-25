@@ -49,8 +49,8 @@ export default function AboutBio({ introOnly = false }: AboutBioProps) {
       ref={containerRef}
       className={
         introOnly
-          ? 'px-12 py-12'
-          : 'px-12 py-12 border-r border-[#1e1e1e] flex flex-col gap-10'
+          ? 'section-x py-8 md:py-12'
+          : 'section-x py-8 md:py-12 md:border-r border-[#1e1e1e] flex flex-col gap-10'
       }
     >
 
