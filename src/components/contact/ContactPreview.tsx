@@ -91,14 +91,14 @@ export default function ContactPreview() {
         <div className="max-w-[640px]">
           <span
             ref={numRef}
-            className="block text-[10px] tracking-[3px] text-[#c8f135] uppercase font-mono mb-4"
+            className="block text-[11px] sm:text-[12px] tracking-[3px] text-[#c8f135] uppercase font-mono mb-4"
           >
             06 — Contact
           </span>
 
           <h2
             ref={headingRef}
-            className="text-[44px] sm:text-[56px] md:text-[72px] leading-[0.92] tracking-tight text-[#f0ede6] mb-5"
+            className="text-[52px] sm:text-[60px] md:text-[72px] leading-[0.92] tracking-tight text-[#f0ede6] mb-5"
             style={{ fontFamily: "'Bebas Neue', sans-serif" }}
           >
             Let&apos;s <span className="text-[#c8f135]">Talk</span>
@@ -106,7 +106,7 @@ export default function ContactPreview() {
 
           <p
             ref={subRef}
-            className="text-[12px] text-[#555] font-mono leading-[1.9] max-w-[420px] mb-8"
+            className="text-[14px] sm:text-[15px] text-[#666] font-mono leading-[1.85] max-w-[420px] mb-8"
           >
             DevOps, MLOps, full-stack, or mobile — form and links live on the contact page.
           </p>
@@ -123,7 +123,7 @@ export default function ContactPreview() {
               style={{ animation: 'pulse-dot 2s ease-in-out infinite' }}
               aria-hidden="true"
             />
-            <span className="text-[#555] text-[10px] uppercase tracking-[2px] font-mono">
+            <span className="text-[#555] text-[12px] uppercase tracking-[2px] font-mono">
               Open to work · Remote-first
             </span>
           </div>
@@ -132,7 +132,7 @@ export default function ContactPreview() {
         <a
           ref={ctaRef}
           href="/contact"
-          className="group w-full sm:w-auto shrink-0 inline-flex items-center justify-center gap-3 bg-transparent hover:bg-[#c8f135] px-6 sm:px-8 py-4 border border-[#c8f135] text-[#c8f135] hover:text-[#0a0a0a] text-[11px] uppercase tracking-[3px] font-mono no-underline transition-colors duration-150"
+          className="group w-full sm:w-auto shrink-0 inline-flex items-center justify-center gap-3 bg-transparent hover:bg-[#c8f135] px-6 sm:px-8 py-4 border border-[#c8f135] text-[#c8f135] hover:text-[#0a0a0a] text-[13px] sm:text-[14px] uppercase tracking-[2px] font-mono no-underline transition-colors duration-150"
         >
           Get in touch
           <span
