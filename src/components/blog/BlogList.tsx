@@ -49,7 +49,7 @@ function PostRow({ post }: { post: BlogPost }) {
     return (
         <a
             href={`/blog/${post.collection}/${post.slug}`}
-            className="group grid grid-cols-1 md:grid-cols-[minmax(72px,92px)_1fr_auto] gap-x-8 md:gap-x-12 gap-y-3 md:gap-y-0 md:items-center hover:bg-[#080808]/50 section-x py-6 sm:py-7 md:py-8 border-[#1e1e1e] border-b no-underline transition-colors duration-150 blog-row"
+            className="group grid grid-cols-1 md:grid-cols-[minmax(72px,92px)_1fr_auto] gap-x-8 md:gap-x-12 gap-y-3 md:gap-y-0 md:items-center hover:bg-[#080808]/50 section-x py-6 sm:py-7 md:py-8 border-[#1e1e1e] border-b no-underline transition-colors duration-150 blog-row text-[13px] sm:text-[14px]"
         >
             <span className="font-mono text-[#555] text-[10px] uppercase tracking-[1px] md:pt-0">
                 {post.date}
@@ -151,7 +151,7 @@ export default function BlogList({ posts, totalPostCount }: BlogListProps) {
                 className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-6 lg:gap-8 section-x pt-10 md:pt-16 pb-8 md:pb-10 border-[#1e1e1e] border-b"
             >
                 <div className="flex-1 min-w-0">
-                    <p className="mb-3 font-mono text-[#333] text-[10px] uppercase tracking-[3px]">
+                    <p className="mb-3 font-mono text-[#333] text-[11px] sm:text-[12px] uppercase tracking-[3px]">
                         — Writing
                     </p>
                     <div className="flex w-full min-w-0 flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
@@ -159,11 +159,11 @@ export default function BlogList({ posts, totalPostCount }: BlogListProps) {
                             <span className="font-mono text-xl sm:text-2xl text-[#c8f135] tabular-nums">
                                 {String(archiveTotal).padStart(2, '0')}
                             </span>
-                            <span className="text-[40px] sm:text-[56px] md:text-[64px]" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>
+                            <span className="text-[48px] sm:text-[56px] md:text-[64px]" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>
                                 Field Notes
                             </span>
                         </h2>
-                        <p className="flex items-baseline gap-2 font-mono text-[#c8f135] text-[10px] uppercase tracking-[2px] sm:tracking-[4px]">
+                        <p className="flex items-baseline gap-2 font-mono text-[#c8f135] text-[12px] sm:text-[13px] uppercase tracking-[2px] sm:tracking-[3px]">
                             <span aria-hidden="true">|</span>
                             <span className="tabular-nums">{String(archiveTotal).padStart(2, '0')}</span>
                             <span>{archiveTotal === 1 ? 'Article' : 'Articles'}</span>
@@ -174,7 +174,7 @@ export default function BlogList({ posts, totalPostCount }: BlogListProps) {
                 <div className="flex items-stretch sm:items-center w-full sm:w-auto">
                     <a
                         href="/blog"
-                        className="group flex w-full sm:w-auto shrink-0 items-center justify-center gap-2 bg-[#0f0f0f] hover:bg-[#1a1a1a] px-4 py-2.5 border border-[#333] hover:border-[#c8f135] font-mono text-[#f0ede6] text-[10px] hover:text-[#c8f135] no-underline uppercase tracking-[2px] transition-colors duration-150"
+                        className="group flex w-full sm:w-auto shrink-0 items-center justify-center gap-2 bg-[#0f0f0f] hover:bg-[#1a1a1a] px-4 py-2.5 border border-[#333] hover:border-[#c8f135] font-mono text-[#f0ede6] text-[12px] sm:text-[13px] hover:text-[#c8f135] no-underline uppercase tracking-[2px] transition-colors duration-150"
                     >
                         View all
                         <span
