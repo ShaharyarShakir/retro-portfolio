@@ -78,14 +78,14 @@ export default function Terminal() {
     return (
         <div
             ref={containerRef}
-            className="bg-[#0d0d0d] p-3 sm:p-5 border border-[#2a2a2a] w-full h-full min-w-0 overflow-x-auto overflow-y-hidden font-mono text-[9px] sm:text-[11px] leading-[1.7] sm:leading-[1.9]"
+            className="bg-[#0d0d0d] p-4 sm:p-5 border border-[#2a2a2a] w-full h-full min-w-0 overflow-x-auto overflow-y-auto font-mono text-[12px] sm:text-[13px] leading-[1.75]"
         >
             {/* Title bar */}
             <div className="flex items-center gap-2 mb-4 pb-3 border-[#1e1e1e] border-b">
                 <span className="bg-[#ff5f57] rounded-full w-2.5 h-2.5" />
                 <span className="bg-[#febc2e] rounded-full w-2.5 h-2.5" />
                 <span className="bg-[#28c840] rounded-full w-2.5 h-2.5" />
-                <span className="ml-2 sm:ml-3 text-[#444] text-[8px] sm:text-[10px] tracking-wide sm:tracking-widest truncate">PRODUCTION — bash</span>
+                <span className="ml-2 sm:ml-3 text-[#444] text-[11px] sm:text-[12px] tracking-wide sm:tracking-widest truncate">PRODUCTION — bash</span>
             </div>
 
             {/* Lines */}
