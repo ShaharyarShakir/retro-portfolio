@@ -78,23 +78,23 @@ export default function Terminal() {
     return (
         <div
             ref={containerRef}
-            className="bg-[#0d0d0d] p-5 border border-[#2a2a2a] w-full h-full overflow-hidden font-mono text-[11px] leading-[1.9]"
+            className="bg-[#0d0d0d] p-3 sm:p-5 border border-[#2a2a2a] w-full h-full min-w-0 overflow-x-auto overflow-y-hidden font-mono text-[9px] sm:text-[11px] leading-[1.7] sm:leading-[1.9]"
         >
             {/* Title bar */}
             <div className="flex items-center gap-2 mb-4 pb-3 border-[#1e1e1e] border-b">
                 <span className="bg-[#ff5f57] rounded-full w-2.5 h-2.5" />
                 <span className="bg-[#febc2e] rounded-full w-2.5 h-2.5" />
                 <span className="bg-[#28c840] rounded-full w-2.5 h-2.5" />
-                <span className="ml-3 text-[#444] text-[10px] tracking-widest">PRODUCTION — bash</span>
+                <span className="ml-2 sm:ml-3 text-[#444] text-[8px] sm:text-[10px] tracking-wide sm:tracking-widest truncate">PRODUCTION — bash</span>
             </div>
 
             {/* Lines */}
             {LINES.slice(0, visibleLines).map((line, i) => (
-                <div key={i} className="flex gap-2">
+                <div key={i} className="flex gap-2 min-w-max sm:min-w-0">
                     {line.prompt && (
-                        <span className="text-[#c8f135] select-none">$</span>
+                        <span className="text-[#c8f135] select-none shrink-0">$</span>
                     )}
-                    <span className={`${line.color ? colorMap[line.color] : 'text-[#555]'} ${!line.prompt ? 'pl-4' : ''}`}>
+                    <span className={`${line.color ? colorMap[line.color] : 'text-[#555]'} ${!line.prompt ? 'pl-2 sm:pl-4' : ''} whitespace-nowrap sm:whitespace-normal`}>
                         {line.text}
                     </span>
                 </div>
