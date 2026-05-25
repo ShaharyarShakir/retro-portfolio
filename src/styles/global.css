@@ -96,3 +96,23 @@ body {
 .cursor-blink {
     animation: blink 1.05s step-end infinite;
 }
+
+/* ── Responsive section padding (matches px-6 sm:px-8 md:px-12) ── */
+.section-x {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+@media (min-width: 640px) {
+    .section-x {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .section-x {
+        padding-left: 3rem;
+        padding-right: 3rem;
+    }
+}
