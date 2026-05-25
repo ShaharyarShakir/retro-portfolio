@@ -9,7 +9,7 @@ const NAV_LINKS = [
     { href: '/about', label: 'About', num: '02' },
     { href: '/#projects', label: 'Projects', num: '03' },
     { href: '/blog', label: 'Blog', num: '04' },
-    { href: '/#contact', label: 'Contact', num: '05' },
+    { href: '/contact', label: 'Contact', num: '05' },
 ]
 
 // ── Smooth scroll helper ──────────────────────────────────────────
@@ -185,7 +185,7 @@ export default function Nav() {
                 className="top-0 right-0 left-0 z-40 fixed bg-[#0a0a0a]/90 backdrop-blur-sm border-[#1e1e1e] border-b h-14"
             >
                 <nav
-                    className="flex justify-between items-center px-8 h-full"
+                    className="flex justify-between items-center px-4 sm:px-6 md:px-8 h-full"
                     aria-label="Main navigation"
                 >
 
@@ -213,7 +213,7 @@ export default function Nav() {
                                 <li key={href}>
                                     <button
                                         onClick={() => {
-                                            if (href.startsWith('/blog')) {
+                                            if (href.startsWith('/blog') || href === '/about' || href === '/contact') {
                                                 window.location.href = href
                                             } else if (href.includes('#')) {
                                                 const [path, hash] = href.split('#')
@@ -286,13 +286,7 @@ export default function Nav() {
 
                         {/* Hire me */}
                         <button
-                            onClick={() => {
-                                if (window.location.pathname === '/') {
-                                    scrollToSection('contact')
-                                } else {
-                                    window.location.href = '/#contact'
-                                }
-                            }}
+                            onClick={() => { window.location.href = '/contact' }}
                             className="bg-transparent hover:bg-[#c8f135] px-4 py-1.5 border border-[#c8f135] text-[#c8f135] text-[10px] hover:text-[#0a0a0a] uppercase tracking-[2px] transition-all duration-150 cursor-pointer"
                         >
                             Hire Me
@@ -330,7 +324,7 @@ export default function Nav() {
                                 <li key={href}>
                                     <button
                                         onClick={() => {
-                                            if (href.startsWith('/blog')) {
+                                            if (href.startsWith('/blog') || href === '/about' || href === '/contact') {
                                                 window.location.href = href
                                             } else if (href.includes('#')) {
                                                 const [path, hash] = href.split('#')
@@ -344,7 +338,7 @@ export default function Nav() {
                                             }
                                             setMenuOpen(false)
                                         }}
-                                        className="flex items-center gap-3 bg-transparent hover:bg-[#111] px-8 py-3 border-none w-full text-[11px] text-left uppercase tracking-[2px] transition-all duration-150 cursor-pointer"
+                                        className="flex items-center gap-3 bg-transparent hover:bg-[#111] px-4 sm:px-6 md:px-8 py-3 border-none w-full text-[11px] text-left uppercase tracking-[2px] transition-all duration-150 cursor-pointer"
                                         style={{ color: isActive ? '#f0ede6' : '#555' }}
                                     >
                                         <span
@@ -361,7 +355,7 @@ export default function Nav() {
                     </ul>
 
                     {/* Mobile bottom bar */}
-                    <div className="flex justify-between items-center px-8 pt-3 pb-5 border-[#1e1e1e] border-t">
+                    <div className="flex justify-between items-center px-4 sm:px-6 md:px-8 pt-3 pb-5 border-[#1e1e1e] border-t">
                         <div className="flex items-center gap-2">
                             <span className="block bg-[#3ddc84] rounded-full w-1.5 h-1.5" aria-hidden="true" />
                             <span className="text-[#555] text-[10px] uppercase tracking-[2px]">
@@ -370,11 +364,7 @@ export default function Nav() {
                         </div>
                         <button
                             onClick={() => {
-                                if (window.location.pathname === '/') {
-                                    scrollToSection('contact')
-                                } else {
-                                    window.location.href = '/#contact'
-                                }
+                                window.location.href = '/contact'
                                 setMenuOpen(false)
                             }}
                             className="bg-transparent hover:bg-[#c8f135] px-4 py-1.5 border border-[#c8f135] text-[#c8f135] text-[10px] hover:text-[#0a0a0a] uppercase tracking-[2px] transition-all duration-150 cursor-pointer"
