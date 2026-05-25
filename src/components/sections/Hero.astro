@@ -1,25 +1,46 @@
 ---
-// Hero.astro — static shell, React islands hydrate client-side
-import HeroText from "../hero/HeroText";
-import HeroRight from "../hero/HeroRight";
+import HeroIntro from "../hero/HeroIntro";
+import HeroActions from "../hero/HeroActions";
+import HeroScenePanel from "../hero/HeroScenePanel";
+import HeroTerminalCell from "../hero/HeroTerminalCell";
 ---
 
 <section
     id="hero"
-    class="relative border-[#1e1e1e] border-b w-full max-w-full overflow-hidden lg:min-h-[calc(100vh-56px)]"
+    class="relative w-full max-w-full overflow-x-hidden border-[#1e1e1e] border-b"
 >
-    <div
-        class="flex flex-col w-full min-w-0 lg:grid lg:grid-cols-2 lg:min-h-[calc(100vh-56px)]"
-    >
-        <HeroText client:load />
-        <HeroRight client:load />
+    <!--
+      2×2 grid (lg+):
+      ┌──────────┬──────────┐
+      │  Intro   │   3D     │
+      ├──────────┼──────────┤
+      │ Actions  │ Terminal │
+      └──────────┴──────────┘
+      Mobile: intro → actions → terminal (3D hidden)
+    -->
+    <div class="hero-grid">
+        <div class="hero-grid__cell hero-grid__intro">
+            <HeroIntro client:load />
+        </div>
+
+        <div class="hero-grid__cell hero-grid__scene">
+            <HeroScenePanel client:load />
+        </div>
+
+        <div class="hero-grid__cell hero-grid__actions">
+            <HeroActions client:load />
+        </div>
+
+        <div class="hero-grid__cell hero-grid__terminal">
+            <HeroTerminalCell client:load />
+        </div>
     </div>
 
     <div
-        class="bottom-6 left-6 md:left-12 absolute z-10 hidden sm:flex items-center gap-3 text-[#333] text-[10px] uppercase tracking-[3px] animate-bounce pointer-events-none"
+        class="pointer-events-none absolute bottom-6 left-6 z-10 hidden items-center gap-3 text-[#333] text-[12px] uppercase tracking-[3px] animate-bounce sm:flex md:left-12"
         aria-hidden="true"
     >
-        <span class="block bg-[#333] w-px h-6"></span>
+        <span class="block h-6 w-px bg-[#333]"></span>
         Scroll
     </div>
 </section>
