@@ -9,7 +9,7 @@ import ProjectCard from './ProjectCard'
 
 const MARQUEE_ITEMS = [
   'DVC', 'MLFLOW', 'LIGHTGBM', 'FASTAPI', 'NLTK',
-  'PROMETHEUS', 'CHROME EXTENSION', 'TF-IDF', 'UV', 'MLOPS',
+  'PROMETHEUS',  'TF-IDF', 'UV', 'MLOPS',
 ]
 
 export default function ProjectsPage() {
