@@ -8,7 +8,7 @@ interface ProjectCardProps {
   index:   number
 }
 
-function stopCardToggle(e: React.MouseEvent | React.PointerEvent) {
+function stopCardToggle(e: React.SyntheticEvent) {
   e.stopPropagation()
 }
 
@@ -70,19 +70,12 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
         ${index % 2 === 0 ? 'md:border-r' : ''}
       `}
     >
-      <div
-        className="p-8 pb-5 cursor-pointer group hover:bg-[#0d0d0d] transition-colors duration-150"
+      <button
+        type="button"
+        className="w-full text-left p-8 pb-5 cursor-pointer group hover:bg-[#0d0d0d] transition-colors duration-150 border-0 bg-transparent"
         onClick={toggle}
-        role="button"
         aria-expanded={open}
         aria-controls={`project-drawer-${project.id}`}
-        tabIndex={0}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault()
-            toggle()
-          }
-        }}
       >
         <div className="flex items-start justify-between mb-5">
           <span
@@ -139,16 +132,14 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
             </span>
           ))}
         </div>
-      </div>
+      </button>
 
       {/* Actions always visible — not inside collapsed drawer */}
-      <div
-        className="relative z-10 flex items-center gap-3 flex-wrap px-8 pb-6"
-        onClick={stopCardToggle}
-        onPointerDown={stopCardToggle}
-      >
+      <div className="relative z-10 flex items-center gap-3 flex-wrap px-8 pb-6">
         <a
           href={detailHref}
+          onClick={stopCardToggle}
+          onPointerDown={stopCardToggle}
           className="
             flex items-center gap-1.5
             px-4 py-2 text-[10px] tracking-[2px] uppercase font-mono
@@ -164,6 +155,8 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
             href={githubHref}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={stopCardToggle}
+            onPointerDown={stopCardToggle}
             className="
               flex items-center gap-1.5
               px-4 py-2 text-[10px] tracking-[2px] uppercase font-mono
@@ -180,6 +173,8 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
             href={project.live}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={stopCardToggle}
+            onPointerDown={stopCardToggle}
             className="
               flex items-center gap-1.5
               px-4 py-2 text-[10px] tracking-[2px] uppercase font-mono
