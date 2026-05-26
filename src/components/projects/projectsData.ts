@@ -37,20 +37,43 @@ export const PROJECTS: Project[] = [
       'DVC',
       'MLflow',
       'FastAPI',
-      'Chrome Extension',
       'uv',
     ],
     stackBreakdown: [
       { name: 'Python / ML', percent: 28 },
       { name: 'DVC / MLflow', percent: 26 },
       { name: 'FastAPI', percent: 22 },
-      { name: 'Chrome Extension', percent: 16 },
       { name: 'Prometheus / uv', percent: 8 },
     ],
     image:    '/projects/placeholder.svg',
     github:   'https://github.com/ShaharyarShakir/youtube-sentiment-analysis',
     featured: true,
   },
+  {
+    id:       'emotion-detection-app',
+    num:      '02',
+    type:     'mobile',
+    name:     'Emotion Detection App',
+    desc:     'Full-stack mobile application that detects emotions from text input using a FastAPI backend and a React Native Expo frontend.',
+    longDesc: 'AI-powered mobile application for detecting emotions such as joy, sadness, anger, fear, and surprise from user-provided text. The backend is built with FastAPI and serves a scikit-learn machine learning pipeline for real-time predictions with confidence scores. The frontend is developed using React Native with Expo, providing a clean and responsive mobile experience. TailwindCSS integration via NativeWind enables modern UI styling, while uv ensures reproducible Python dependency management and streamlined backend workflows.',
+    stack:    [
+      'Python',
+      'scikit-learn',
+      'FastAPI',
+      'Expo',
+      'TailwindCSS',
+      'uv',
+    ],
+    stackBreakdown: [
+      { name: 'Python / scikit-learn', percent: 32 },
+      { name: 'FastAPI', percent: 24 },
+      { name: 'Expo', percent: 30 },
+      { name: 'TailwindCSS / uv', percent: 14 },
+    ],
+    image:    '/projects/placeholder.svg',
+    github:   'https://github.com/ShaharyarShakir/emotions_detections_app',
+    featured: true,
+  }
 ]
 
 export function getProjectById(id: string): Project | undefined {
