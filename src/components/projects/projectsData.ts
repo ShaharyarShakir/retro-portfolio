@@ -21,6 +21,9 @@ export interface Project {
   live?:          string
   featured:       boolean
   wip?:           boolean
+percentileMetrics?: { label: string; value: number; description?: string }[]
+overallPercentile?: number   // 0–100
+stats?: { label: string; value: string }[]
 }
 
 export const PROJECTS: Project[] = [
