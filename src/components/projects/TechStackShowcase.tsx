@@ -1,220 +1,196 @@
-import { useRef, useState, useCallback } from 'react'
-import { useGSAP } from '@gsap/react'
+import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import type { StackBreakdown } from './projectsData'
-import { techIconUrl, techAccentColor } from './techIcons'
+import { techAccentColor, techIconUrl } from './techIcons'
 
 interface TechStackShowcaseProps {
   items: StackBreakdown[]
   accent?: string
 }
 
-export default function TechStackShowcase({
-  items,
-  accent = '#c8f135',
-}: TechStackShowcaseProps) {
-  const trackRef = useRef<HTMLDivElement>(null)
-  const tweenRef = useRef<gsap.core.Tween | null>(null)
+interface InfiniteRowProps {
+  items: StackBreakdown[]
+  reverse?: boolean
+  speed?: number
+  selected: string | null
+  setSelected: React.Dispatch<React.SetStateAction<string | null>>
+}
 
-  const [paused, setPaused] = useState(false)
-  const [selected, setSelected] = useState<string | null>(null)
+function InfiniteRow({
+  items,
+  reverse = false,
+  speed = 40,
+  selected,
+  setSelected,
+}: InfiniteRowProps) {
+  const rowRef = useRef<HTMLDivElement>(null)
+  const tweenRef = useRef<gsap.core.Tween | null>(null)
 
   const doubled = [...items, ...items]
 
-  const stopMotion = useCallback(() => {
-    tweenRef.current?.pause()
-    setPaused(true)
-  }, [])
+  useEffect(() => {
+    const row = rowRef.current
+    if (!row) return
 
-  const startMotion = useCallback(() => {
-    if (selected) return
-    tweenRef.current?.play()
-    setPaused(false)
-  }, [selected])
+    const totalWidth = row.scrollWidth / 2
 
-  useGSAP(() => {
-    if (!trackRef.current) return
+    gsap.set(row, {
+      x: reverse ? -totalWidth : 0,
+    })
 
-    const track = trackRef.current
+    tweenRef.current?.kill()
 
-    // wait for layout to be stable
-    const totalWidth = track.scrollWidth / 2
-
-    // reset position cleanly
-    gsap.set(track, { x: 0 })
-
-    tweenRef.current = gsap.to(track, {
-      x: `-=${totalWidth}`,
-      duration: 22,
+    tweenRef.current = gsap.to(row, {
+      x: reverse ? `+=${totalWidth}` : `-=${totalWidth}`,
+      duration: speed,
       ease: 'none',
       repeat: -1,
+      force3D: true,
       modifiers: {
         x: gsap.utils.unitize((x) => {
           const value = parseFloat(x)
-          return value % totalWidth
+
+          return reverse
+            ? value % totalWidth
+            : value % totalWidth
         }),
       },
     })
 
+    if (selected) {
+      tweenRef.current.pause()
+    }
+
     return () => {
       tweenRef.current?.kill()
     }
-  }, [items])
+  }, [items, reverse, speed])
 
-  const handleIconClick = (name: string) => {
-    stopMotion()
+  useEffect(() => {
+    if (!tweenRef.current) return
 
-    const next = selected === name ? null : name
-    setSelected(next)
-
-    const all =
-      trackRef.current?.querySelectorAll<HTMLButtonElement>('[data-tech-icon]')
-
-    if (next === null) {
-      all?.forEach((btn) => {
-        gsap.to(btn, { scale: 1, opacity: 1, duration: 0.3 })
-
-        const glow = btn.querySelector('.tech-glow')
-        if (glow) gsap.to(glow, { opacity: 0, scale: 0.8, duration: 0.3 })
-      })
-
-      tweenRef.current?.play()
-      setPaused(false)
-      return
+    if (selected) {
+      tweenRef.current.pause()
+    } else {
+      tweenRef.current.play()
     }
+  }, [selected])
 
-    all?.forEach((btn) => {
-      const isTarget = btn.dataset.techName === next
-
-      gsap.to(btn, {
-        scale: isTarget ? 1.35 : 0.85,
-        opacity: isTarget ? 1 : 0.35,
-        duration: 0.35,
-        ease: 'back.out(1.6)',
-      })
-
-      const glow = btn.querySelector('.tech-glow')
-      if (glow) {
-        gsap.to(glow, {
-          opacity: isTarget ? 1 : 0,
-          scale: isTarget ? 1.2 : 0.8,
-          duration: 0.4,
-        })
-      }
-    })
-  }
-
-  const handleIconEnter = (name: string) => {
-    if (selected) return
-
-    stopMotion()
-
-    const btn = trackRef.current?.querySelector<HTMLButtonElement>(
-      `[data-tech-name="${name}"]`,
-    )
-    if (!btn) return
-
-    gsap.to(btn, { scale: 1.2, duration: 0.25, ease: 'power2.out' })
-
-    const glow = btn.querySelector('.tech-glow')
-    if (glow) gsap.to(glow, { opacity: 0.85, duration: 0.25 })
-  }
-
-  const handleIconLeave = (name: string) => {
-    if (selected) return
-
-    startMotion()
-
-    const btn = trackRef.current?.querySelector<HTMLButtonElement>(
-      `[data-tech-name="${name}"]`,
-    )
-    if (!btn) return
-
-    gsap.to(btn, { scale: 1, duration: 0.25 })
-
-    const glow = btn.querySelector('.tech-glow')
-    if (glow) gsap.to(glow, { opacity: 0, duration: 0.25 })
+  const handleClick = (name: string) => {
+    setSelected((prev) => (prev === name ? null : name))
   }
 
   return (
-    <div className="space-y-10">
-      {/* Animated icon belt */}
+    <div className="relative overflow-hidden py-8">
+      {/* fade edges */}
+      <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-[#080808] to-transparent z-10 pointer-events-none" />
+      <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-[#080808] to-transparent z-10 pointer-events-none" />
+
       <div
-        className="relative border border-[#1e1e1e] bg-[#080808] overflow-hidden"
-        onMouseEnter={stopMotion}
-        onMouseLeave={() => {
-          if (!selected) startMotion()
+        ref={rowRef}
+        className="flex items-center gap-10 px-6 w-max"
+        style={{
+          willChange: 'transform',
+          transform: 'translate3d(0,0,0)',
+          backfaceVisibility: 'hidden',
         }}
       >
-        <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[#080808] to-transparent z-10 pointer-events-none" />
-        <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[#080808] to-transparent z-10 pointer-events-none" />
+        {doubled.map((item, i) => {
+          const color = techAccentColor(item.name)
+          const isSel = selected === item.name
 
+          return (
+            <button
+              key={`${item.name}-${i}`}
+              type="button"
+              onClick={() => handleClick(item.name)}
+              className="relative flex flex-col items-center gap-3 shrink-0 group"
+            >
+              {/* glow */}
+              <span
+                className="absolute inset-0 rounded-full blur-2xl transition-all duration-500"
+                style={{
+                  background: color,
+                  opacity: isSel ? 0.45 : 0,
+                  transform: isSel ? 'scale(1.2)' : 'scale(0.8)',
+                }}
+              />
+
+              {/* icon */}
+              <div
+                className="relative flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 border bg-[#0a0a0a] transition-all duration-300"
+                style={{
+                  borderColor: isSel ? color : '#1e1e1e',
+                  transform: isSel ? 'scale(1.18)' : 'scale(1)',
+                  opacity: selected && !isSel ? 0.35 : 1,
+                  boxShadow: isSel
+                    ? `0 0 24px ${color}88`
+                    : 'none',
+                }}
+              >
+                <img
+                  src={techIconUrl(item.name)}
+                  alt={item.name}
+                  width={40}
+                  height={40}
+                  loading="lazy"
+                  className="w-8 h-8 sm:w-10 sm:h-10 object-contain"
+                />
+              </div>
+
+              {/* label */}
+              <span
+                className="text-[10px] uppercase tracking-[1px] font-mono"
+                style={{
+                  color: isSel ? color : '#666',
+                  opacity: selected && !isSel ? 0.35 : 1,
+                }}
+              >
+                {item.name}
+              </span>
+            </button>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
+export default function TechStackShowcase({
+  items,
+  accent = '#c8f135',
+}: TechStackShowcaseProps) {
+  const [selected, setSelected] = useState<string | null>(null)
+
+  return (
+    <div className="space-y-10">
+      {/* motion container */}
+      <div className="border border-[#1e1e1e] bg-[#080808] overflow-hidden">
         <p className="px-5 pt-4 text-[9px] tracking-[2px] uppercase text-[#333] font-mono">
-          {paused
-            ? '// motion paused — click an icon'
-            : '// stack in motion — hover or click'}
+          {selected
+            ? `// focused on ${selected}`
+            : '// infinite stack motion'}
         </p>
 
-        <div className="py-8 overflow-hidden">
-          <div
-            ref={trackRef}
-            className="flex items-center gap-10 px-6 will-change-transform"
-            style={{ transform: 'translate3d(0,0,0)' }}
-          >
-            {doubled.map((item, i) => {
-              const color = techAccentColor(item.name)
-              const isSel = selected === item.name
+        {/* top */}
+        <InfiniteRow
+          items={items}
+          speed={28}
+          selected={selected}
+          setSelected={setSelected}
+        />
 
-              return (
-                <button
-                  key={`${item.name}-${i}`}
-                  type="button"
-                  data-tech-icon
-                  data-tech-name={item.name}
-                  onClick={() => handleIconClick(item.name)}
-                  onMouseEnter={() => handleIconEnter(item.name)}
-                  onMouseLeave={() => handleIconLeave(item.name)}
-                  className="relative flex flex-col items-center gap-2 bg-transparent border-none cursor-pointer shrink-0"
-                  aria-pressed={isSel}
-                >
-                  <span
-                    className="tech-glow absolute inset-0 rounded-full opacity-0 pointer-events-none"
-                    style={{
-                      background: `radial-gradient(circle, ${color}55 0%, transparent 70%)`,
-                      filter: `blur(12px)`,
-                    }}
-                  />
-
-                  <span
-                    className="relative flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 border border-[#1e1e1e] bg-[#0a0a0a]"
-                    style={{
-                      boxShadow: isSel
-                        ? `0 0 24px ${color}66, 0 0 48px ${color}33`
-                        : undefined,
-                      borderColor: isSel ? color : '#1e1e1e',
-                    }}
-                  >
-                    <img
-                      src={techIconUrl(item.name)}
-                      alt=""
-                      width={40}
-                      height={40}
-                      className="w-8 h-8 sm:w-10 sm:h-10 object-contain"
-                      loading="lazy"
-                    />
-                  </span>
-
-                  <span className="text-[9px] font-mono tracking-[1px] text-[#555] uppercase">
-                    {item.name}
-                  </span>
-                </button>
-              )
-            })}
-          </div>
-        </div>
+        {/* bottom */}
+        <InfiniteRow
+          items={items}
+          reverse
+          speed={32}
+          selected={selected}
+          setSelected={setSelected}
+        />
       </div>
 
-      {/* Percentile breakdown */}
+      {/* composition */}
       <div>
         <p className="text-[10px] tracking-[3px] text-[#333] uppercase font-mono mb-5">
           <span style={{ color: accent }}>//</span> Stack composition
@@ -227,27 +203,29 @@ export default function TechStackShowcase({
 
             return (
               <li key={item.name}>
-                <div className="flex items-center justify-between mb-1.5 gap-3">
-                  <div className="flex items-center gap-2 min-w-0">
+                <div className="flex items-center justify-between mb-1.5">
+                  <div className="flex items-center gap-2">
                     <img
                       src={techIconUrl(item.name)}
-                      alt=""
-                      width={16}
-                      height={16}
-                      className="w-4 h-4 shrink-0 object-contain"
+                      alt={item.name}
+                      className="w-4 h-4 object-contain"
                     />
 
                     <span
-                      className="text-[11px] font-mono truncate"
-                      style={{ color: isSel ? color : '#888' }}
+                      className="text-[11px] font-mono"
+                      style={{
+                        color: isSel ? color : '#888',
+                      }}
                     >
                       {item.name}
                     </span>
                   </div>
 
                   <span
-                    className="text-[11px] font-mono tabular-nums"
-                    style={{ color: isSel ? accent : '#555' }}
+                    className="text-[11px] font-mono"
+                    style={{
+                      color: isSel ? accent : '#555',
+                    }}
                   >
                     {item.percent}%
                   </span>
@@ -255,11 +233,13 @@ export default function TechStackShowcase({
 
                 <div className="h-1.5 bg-[#111] border border-[#1e1e1e] overflow-hidden">
                   <div
-                    className="h-full transition-all duration-500 ease-out"
+                    className="h-full transition-all duration-500"
                     style={{
                       width: `${item.percent}%`,
-                      backgroundColor: isSel ? color : accent,
-                      boxShadow: isSel ? `0 0 12px ${color}88` : undefined,
+                      background: isSel ? color : accent,
+                      boxShadow: isSel
+                        ? `0 0 14px ${color}88`
+                        : undefined,
                     }}
                   />
                 </div>
