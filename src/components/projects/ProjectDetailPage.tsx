@@ -14,19 +14,36 @@ export default function ProjectDetailPage({ project }: ProjectDetailPageProps) {
   const pageRef  = useRef<HTMLDivElement>(null)
   const heroRef  = useRef<HTMLElement>(null)
   const accent   = TAG_COLOR[project.type]
-
   useGSAP(() => {
     gsap.registerPlugin(ScrollTrigger)
-
+  
     if (heroRef.current) {
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
+  
       tl.from('.pd-eyebrow', { y: 12, opacity: 0, duration: 0.4 })
-        .from('.pd-title', { y: 48, opacity: 0, duration: 0.7, ease: 'power4.out' }, '-=0.1')
-        .from('.pd-image', { scale: 0.96, opacity: 0, duration: 0.65 }, '-=0.35')
-        .from('.pd-desc', { y: 16, opacity: 0, duration: 0.5 }, '-=0.3')
+        .from('.pd-title', {
+          y: 48,
+          opacity: 0,
+          duration: 0.7,
+          ease: 'power4.out',
+        }, '-=0.1')
+        .from('.pd-image', {
+          scale: 0.96,
+          opacity: 0,
+          duration: 0.65,
+        }, '-=0.35')
+        .from('.pd-desc', {
+          y: 16,
+          opacity: 0,
+          duration: 0.5,
+        }, '-=0.3')
     }
-
-    gsap.utils.toArray<HTMLElement>('.pd-reveal').forEach((el) => {
+  
+    const sections = gsap.utils.toArray<HTMLElement>(
+      pageRef.current?.querySelectorAll('.pd-reveal') || []
+    )
+  
+    sections.forEach((el) => {
       gsap.from(el, {
         y: 28,
         opacity: 0,
@@ -121,17 +138,17 @@ export default function ProjectDetailPage({ project }: ProjectDetailPageProps) {
         <p className="text-[10px] tracking-[3px] text-[#333] uppercase font-mono mb-6">
           <span style={{ color: accent }}>//</span> Links
         </p>
-        <div className="flex flex-wrap items-center gap-3">
+        <div className="flex flex-wrap items-center ">
           {project.github && (
             <a
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="
-                inline-flex items-center gap-2 px-5 py-3 text-[10px] tracking-[2px] uppercase font-mono
+              className=" font-bold
+                inline-flex items-center gap-2 px-5 py-3 text-[12px] tracking-[2px] uppercase font-mono
                 border border-[#1e1e1e] text-[#555] no-underline
                 hover:border-[#c8f135] hover:text-[#c8f135]
-                transition-all duration-150
+                transition-all duration-150 whitespace-nowrap
               "
             >
               GitHub ↗
