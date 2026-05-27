@@ -10,11 +10,7 @@ interface Props {
 }
 
 const { post } = Astro.props;
-const { title, excerpt, date, tag, readTime, github, projectUrl, featured } = post.data;
-
-const projectLink = projectUrl ?? github;
-const showProjectCta = Boolean(projectLink);
-const showGithubCta = Boolean(github);
+const { title, excerpt, date, tag, readTime, featured } = post.data;
 
 // Format date for display
 const displayDate = date.toLocaleDateString("en-US", {
@@ -146,36 +142,7 @@ const tagColor = TAG_COLORS[tag] ?? "#c8f135";
                     }
                 </div>
 
-                {
-                    (showProjectCta || showGithubCta) && (
-                        <div class="post-cta-bar">
-                            {
-                                showProjectCta && (
-                                    <a
-                                        href={projectLink}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        class="post-cta-btn post-cta-btn--primary w-full sm:w-auto"
-                                    >
-                                        View Project ↗
-                                    </a>
-                                )
-                            }
-                            {
-                                showGithubCta && (
-                                    <a
-                                        href={github}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        class="post-cta-btn post-cta-btn--secondary w-full sm:w-auto"
-                                    >
-                                        View on GitHub ↗
-                                    </a>
-                                )
-                            }
-                        </div>
-                    )
-                }
+
             </div>
 
             <!-- ── MDX content ── -->
@@ -183,36 +150,7 @@ const tagColor = TAG_COLORS[tag] ?? "#c8f135";
                 <slot />
             </article>
 
-            {
-                (showProjectCta || showGithubCta) && (
-                    <div class="post-cta-bar mt-12 mb-4">
-                        {
-                            showProjectCta && (
-                                <a
-                                    href={projectLink}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="post-cta-btn post-cta-btn--primary w-full sm:w-auto"
-                                >
-                                    View Project ↗
-                                </a>
-                            )
-                        }
-                        {
-                            showGithubCta && (
-                                <a
-                                    href={github}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="post-cta-btn post-cta-btn--secondary w-full sm:w-auto"
-                                >
-                                    View on GitHub ↗
-                                </a>
-                            )
-                        }
-                    </div>
-                )
-            }
+
 
             <!-- ── Post footer ── -->
             <div
