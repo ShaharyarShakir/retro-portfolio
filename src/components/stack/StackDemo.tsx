@@ -126,13 +126,13 @@ export default function StackDemo() {
               </p>
             </div>
 
-            {/* Top 3 items preview */}
+            {/* Top 6 items preview */}
             <div>
               <p className="text-[9px] font-mono tracking-[1.5px] text-[#333] uppercase mb-3">
                 Core Technologies
               </p>
               <div className="flex flex-wrap gap-1.5">
-                {section.items.slice(0, 3).map((item) => (
+                {section.items.slice(0, 6).map((item) => (
                   <span
                     key={item.name}
                     className="text-[9px] px-2 py-0.5 border border-[#1e1e1e] text-[#555] group-hover:text-[#f0ede6] group-hover:border-[#2a2a2a] font-mono tracking-[1px] transition-all duration-200"
@@ -140,9 +140,9 @@ export default function StackDemo() {
                     {item.name}
                   </span>
                 ))}
-                {section.items.length > 3 && (
+                {section.items.length > 6 && (
                   <span className="text-[9px] px-2 py-0.5 text-[#333] font-mono">
-                    +{section.items.length - 3} more
+                    +{section.items.length - 6} more
                   </span>
                 )}
               </div>
