@@ -82,9 +82,17 @@ export default function StackDemo() {
             Tech Stack
           </h2>
         </div>
-        <p className="text-[12px] text-[#555] font-mono leading-[1.8] max-w-[420px]">
-          A preview of my production tools and frameworks, organized by field of specialization.
-        </p>
+        <div className="flex flex-col gap-4 max-w-[420px] items-start w-full sm:w-auto">
+          <p className="text-[12px] text-[#555] font-mono leading-[1.8]">
+            A preview of my production tools and frameworks, organized by field of specialization.
+          </p>
+          <a
+            href="/stack"
+            className="post-cta-btn post-cta-btn--primary w-full sm:w-auto text-center py-2 min-h-[40px] text-[11px] tracking-[1.5px]"
+          >
+            Explore Full Stack →
+          </a>
+        </div>
       </div>
 
       {/* ── Body: Categories Grid ── */}
