@@ -11,15 +11,15 @@ interface ProjectDetailPageProps {
 }
 
 export default function ProjectDetailPage({ project }: ProjectDetailPageProps) {
-  const pageRef  = useRef<HTMLDivElement>(null)
-  const heroRef  = useRef<HTMLElement>(null)
-  const accent   = TAG_COLOR[project.type]
+  const pageRef = useRef<HTMLDivElement>(null)
+  const heroRef = useRef<HTMLElement>(null)
+  const accent = TAG_COLOR[project.type]
   useGSAP(() => {
     gsap.registerPlugin(ScrollTrigger)
-  
+
     if (heroRef.current) {
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
-  
+
       tl.from('.pd-eyebrow', { y: 12, opacity: 0, duration: 0.4 })
         .from('.pd-title', {
           y: 48,
@@ -37,12 +37,17 @@ export default function ProjectDetailPage({ project }: ProjectDetailPageProps) {
           opacity: 0,
           duration: 0.5,
         }, '-=0.3')
+        .from('.pd-cta', {
+          y: 12,
+          opacity: 0,
+          duration: 0.4,
+        }, '-=0.3')
     }
-  
+
     const sections = gsap.utils.toArray<HTMLElement>(
       pageRef.current?.querySelectorAll('.pd-reveal') || []
     )
-  
+
     sections.forEach((el) => {
       gsap.from(el, {
         y: 28,
@@ -122,6 +127,8 @@ export default function ProjectDetailPage({ project }: ProjectDetailPageProps) {
         <p className="pd-desc text-[13px] sm:text-[14px] text-[#666] font-mono leading-[1.9] max-w-3xl">
           {project.longDesc}
         </p>
+
+
       </header>
 
       <section className="px-6 sm:px-10 md:px-12 py-14 md:py-20 border-b border-[#1e1e1e] pd-reveal">
@@ -138,35 +145,25 @@ export default function ProjectDetailPage({ project }: ProjectDetailPageProps) {
         <p className="text-[10px] tracking-[3px] text-[#333] uppercase font-mono mb-6">
           <span style={{ color: accent }}>//</span> Links
         </p>
-        <div className="flex flex-wrap items-center ">
-          {project.github && (
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className=" font-bold
-                inline-flex items-center gap-2 px-5 py-3 text-[12px] tracking-[2px] uppercase font-mono
-                border border-[#1e1e1e] text-[#555] no-underline
-                hover:border-[#c8f135] hover:text-[#c8f135]
-                transition-all duration-150 whitespace-nowrap
-              "
-            >
-              GitHub ↗
-            </a>
-          )}
+        <div className="flex flex-col sm:flex-row sm:items-center gap-4">
           {project.live && (
             <a
               href={project.live}
               target="_blank"
               rel="noopener noreferrer"
-              className="
-                inline-flex items-center gap-2 px-5 py-3 text-[10px] tracking-[2px] uppercase font-mono
-                bg-[#c8f135] text-[#0a0a0a] border border-[#c8f135] no-underline
-                hover:bg-transparent hover:text-[#c8f135]
-                transition-all duration-150
-              "
+              className="post-cta-btn post-cta-btn--primary w-full sm:w-auto"
             >
-              Live demo →
+              View Project ↗
+            </a>
+          )}
+          {project.github && (
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="post-cta-btn post-cta-btn--secondary w-full sm:w-auto"
+            >
+              View on GitHub ↗
             </a>
           )}
           {!project.github && !project.live && (
