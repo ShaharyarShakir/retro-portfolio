@@ -69,41 +69,33 @@ export default function StackDemo() {
       {/* ── Section header ── */}
       <div
         ref={headerRef}
-        className="flex flex-col md:flex-row md:items-end justify-between px-6 sm:px-10 md:px-12 pt-16 pb-10 border-b border-[#1e1e1e] gap-4"
+        className="flex flex-col md:flex-row md:items-end justify-between px-4 sm:px-6 md:px-12 pt-12 md:pt-16 pb-8 md:pb-10 border-b border-[#1e1e1e] gap-4"
       >
         <div>
           <p className="text-[10px] tracking-[3px] text-[#333] uppercase font-mono mb-3">
             <span className="text-[#c8f135]">02</span> — Tooling
           </p>
           <h2
-            className="text-[56px] sm:text-[64px] leading-none text-[#f0ede6] tracking-tight"
+            className="text-[44px] sm:text-[56px] md:text-[64px] leading-none text-[#f0ede6] tracking-tight"
             style={{ fontFamily: "'Bebas Neue', sans-serif" }}
           >
             Tech Stack
           </h2>
         </div>
-        <div className="flex flex-col gap-4 max-w-[420px] items-start w-full sm:w-auto">
-          <p className="text-[12px] text-[#555] font-mono leading-[1.8]">
-            A preview of my production tools and frameworks, organized by field of specialization.
-          </p>
-          <a
-            href="/stack"
-            className="post-cta-btn post-cta-btn--primary w-full sm:w-auto text-center py-2 min-h-[40px] text-[11px] tracking-[1.5px]"
-          >
-            Explore Full Stack →
-          </a>
-        </div>
+        <p className="text-[12px] text-[#555] font-mono leading-[1.8] max-w-[420px]">
+          A preview of my production tools and frameworks, organized by field of specialization.
+        </p>
       </div>
 
       {/* ── Body: Categories Grid ── */}
       <div
         ref={gridRef}
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 divide-y md:divide-y-0 sm:divide-x divide-[#1e1e1e] border-b border-[#1e1e1e]"
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 divide-y sm:divide-y-0 sm:divide-x divide-[#1e1e1e] border-b border-[#1e1e1e]"
       >
         {STACK_DATA.map((section) => (
           <div
             key={section.id}
-            className="group flex flex-col justify-between p-8 hover:bg-[#0d0d0d] transition-all duration-300 relative overflow-hidden"
+            className="group flex flex-col justify-between p-6 sm:p-8 hover:bg-[#0d0d0d] transition-all duration-300 relative overflow-hidden"
           >
             {/* Top Hover Line in category color */}
             <div
@@ -113,9 +105,9 @@ export default function StackDemo() {
 
             <div>
               {/* Category header */}
-              <div className="flex items-start justify-between mb-8">
+              <div className="flex items-start justify-between mb-6 sm:mb-8">
                 <span
-                  className="text-[40px] leading-none text-[#1e1e1e] group-hover:text-[#2a2a2a] transition-colors duration-300 tabular-nums"
+                  className="text-[36px] sm:text-[40px] leading-none text-[#1e1e1e] group-hover:text-[#2a2a2a] transition-colors duration-300 tabular-nums"
                   style={{ fontFamily: "'Bebas Neue', sans-serif" }}
                 >
                   {section.num}
@@ -129,7 +121,7 @@ export default function StackDemo() {
               </div>
 
               {/* Tagline */}
-              <p className="text-[12px] text-[#888] group-hover:text-[#f0ede6] font-mono leading-[1.7] mb-8 transition-colors duration-250">
+              <p className="text-[12px] text-[#888] group-hover:text-[#f0ede6] font-mono leading-[1.7] mb-6 sm:mb-8 transition-colors duration-250">
                 {section.tagline}
               </p>
             </div>
@@ -162,7 +154,7 @@ export default function StackDemo() {
       {/* ── Call to action ── */}
       <div
         ref={ctaRef}
-        className="flex justify-center items-center py-12 px-6 bg-[#0a0a0a]/50"
+        className="flex justify-center items-center py-10 md:py-12 px-4 sm:px-6 bg-[#0a0a0a]/50"
       >
         <a
           href="/stack"
